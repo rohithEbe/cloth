@@ -1,0 +1,138 @@
+/* ==========================================================================
+   Categories Component Styles (Matching OLIVIA Design)
+   ========================================================================== */
+.olivia-categories-section {
+  width: 100%;
+  padding: 3rem 0;
+  background-color: #faf8f5;
+  border-top: 1px solid #f0ebe4;
+}
+
+.categories-wrapper {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.categories-header {
+  text-align: center;
+  margin-bottom: 2.2rem;
+}
+
+.categories-subtitle {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #8d7363;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.categories-heading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #2b2521;
+}
+
+.categories-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.category-tile {
+  background-color: #ffffff;
+  border: 1px solid #ebe5df;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.category-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  border-color: #8d7363;
+}
+
+.category-img-container {
+  height: 200px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.cat-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.category-tile:hover .cat-img {
+  transform: scale(1.06);
+}
+
+.cat-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, transparent 40%, rgba(43, 37, 33, 0.5) 100%);
+}
+
+.cat-details {
+  padding: 1.25rem 1rem;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.cat-icon-badge {
+  font-size: 1.4rem;
+  display: inline-block;
+  margin-bottom: 0.4rem;
+}
+
+.cat-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #2b2521;
+  margin-bottom: 0.25rem;
+}
+
+.cat-count {
+  font-size: 0.78rem;
+  color: #8c857f;
+  display: block;
+  margin-bottom: 0.65rem;
+}
+
+.cat-shop-link {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #8d7363;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+
+.category-tile:hover .cat-shop-link {
+  color: #2b2521;
+  text-decoration: underline;
+}
+
+@media (max-width: 992px) {
+  .categories-grid-layout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .categories-grid-layout {
+    grid-template-columns: 1fr;
+  }
+}
+

@@ -1,0 +1,205 @@
+/* ==========================================================================
+   Footer Component Styles (Matching OLIVIA Design)
+   ========================================================================== */
+.olivia-footer {
+  background-color: #2b2521;
+  color: #bfb7b0;
+  width: 100%;
+}
+
+.footer-top-section {
+  padding: 4rem 0 3rem;
+  border-bottom: 1px solid #3c342f;
+}
+
+.footer-content-wrapper {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.footer-grid-layout {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr 1.6fr;
+  gap: 2.5rem;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.footer-emblem {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #bfb7b0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.footer-brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #ffffff;
+}
+
+.footer-desc {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  color: #a8a098;
+}
+
+.footer-social-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.footer-social-row a {
+  width: 34px;
+  height: 34px;
+  background-color: #38302b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.footer-social-row a:hover {
+  background-color: #8d7363;
+  transform: translateY(-2px);
+}
+
+.col-heading {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.04em;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.65rem;
+}
+
+.footer-links a {
+  color: #bfb7b0;
+  text-decoration: none;
+  font-size: 0.82rem;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+  padding-left: 2px;
+}
+
+.newsletter-text {
+  font-size: 0.85rem;
+  color: #a8a098;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.newsletter-form-box {
+  display: flex;
+  background-color: #38302b;
+  border: 1px solid #4a403a;
+  border-radius: 999px;
+  padding: 3px 4px 3px 14px;
+  transition: border-color 0.2s;
+}
+
+.newsletter-form-box:focus-within {
+  border-color: #8d7363;
+}
+
+.newsletter-form-box input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 0.82rem;
+  width: 100%;
+}
+
+.newsletter-form-box input::placeholder {
+  color: #8c827a;
+}
+
+.newsletter-form-box button {
+  background-color: #8d7363;
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.newsletter-form-box button:hover {
+  background-color: #a08573;
+}
+
+.newsletter-confirm {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 0.78rem;
+  color: #4ade80;
+}
+
+.footer-bottom-section {
+  padding: 1.25rem 0;
+  font-size: 0.78rem;
+  color: #8c827a;
+}
+
+.bottom-bar-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-payment-icons {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: #bfb7b0;
+}
+
+@media (max-width: 992px) {
+  .footer-grid-layout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-grid-layout {
+    grid-template-columns: 1fr;
+  }
+}
+

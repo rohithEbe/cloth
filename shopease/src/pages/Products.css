@@ -235,24 +235,141 @@
   margin-bottom: 0.9rem;
 }
 
+.clickable-title {
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s ease;
+}
+
+.clickable-title:hover {
+  color: #c47d2f;
+}
+
 .caret-icon {
   font-size: 0.75rem;
   color: #888888;
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.caret-icon.rotate-down {
+  transform: rotate(180deg);
+}
+
+/* Category Filter Body & Search */
+.category-filter-body {
+  animation: fadeInCategory 0.2s ease-out;
+}
+
+@keyframes fadeInCategory {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.category-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.cat-search-icon {
+  position: absolute;
+  left: 8px;
+  font-size: 0.7rem;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.category-search-input {
+  width: 100%;
+  padding: 0.38rem 1.6rem 0.38rem 1.8rem;
+  font-size: 0.76rem;
+  border: 1px solid #e5ded6;
+  border-radius: 6px;
+  outline: none;
+  background-color: #faf7f4;
+  color: #2b2521;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.category-search-input:focus {
+  background-color: #ffffff;
+  border-color: #c47d2f;
+  box-shadow: 0 0 0 2px rgba(196, 125, 47, 0.12);
+}
+
+.category-search-input::placeholder {
+  color: #a69b91;
+}
+
+.cat-search-clear {
+  position: absolute;
+  right: 8px;
+  background: none;
+  border: none;
+  color: #9a8c83;
+  font-size: 0.7rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.cat-search-clear:hover {
+  color: #2b2521;
+}
+
+.no-cat-found {
+  font-size: 0.75rem;
+  color: #9a8c83;
+  font-style: italic;
+  padding: 0.4rem 0;
+}
+
+.toggle-more-cat-btn {
+  background: none;
+  border: none;
+  color: #c47d2f;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.5rem 0.2rem 0;
+  display: inline-block;
+  transition: opacity 0.15s;
+}
+
+.toggle-more-cat-btn:hover {
+  text-decoration: underline;
+  color: #a3611d;
 }
 
 .filter-options-list {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.5rem;
 }
 
 .filter-checkbox-row {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.55rem;
   cursor: pointer;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: #3b322a;
+  padding: 0.25rem 0.35rem;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+}
+
+.filter-checkbox-row:hover {
+  background-color: #faf6f1;
 }
 
 .filter-checkbox-row input {
@@ -260,15 +377,20 @@
 }
 
 .checkmark-box {
-  width: 15px;
-  height: 15px;
-  border: 1.5px solid #c0b8b0;
-  border-radius: 2px;
+  width: 17px;
+  height: 17px;
+  border: 1.5px solid #c8bfb5;
+  border-radius: 3px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.15s;
+  background-color: #ffffff;
+  transition: all 0.15s ease;
+}
+
+.filter-checkbox-row:hover .checkmark-box {
+  border-color: #c47d2f;
 }
 
 .filter-checkbox-row input:checked + .checkmark-box {
@@ -278,15 +400,16 @@
 
 .filter-checkbox-row input:checked + .checkmark-box::after {
   content: "✓";
-  color: white;
-  font-size: 0.65rem;
-  font-weight: bold;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .radio-box {
-  width: 15px;
-  height: 15px;
-  border: 1.5px solid #c0b8b0;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid #c8bfb5;
   border-radius: 50%;
   flex-shrink: 0;
   transition: all 0.15s;
@@ -298,16 +421,23 @@
 }
 
 .cat-icon {
-  font-size: 0.85rem;
+  font-size: 0.95rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .filter-name {
   flex: 1;
+  font-weight: 500;
+  color: #2b2521;
 }
 
 .filter-count {
   color: #9b9089;
   font-size: 0.75rem;
+  font-weight: 500;
 }
 
 .star-icon {
@@ -449,6 +579,96 @@
   background-color: #c47d2f;
   color: #ffffff;
   border-color: #c47d2f;
+}
+
+/* ==========================================================================
+   ACTIVE FILTER CHIPS BAR (Modern Web UX)
+   ========================================================================== */
+.active-filter-chips-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.3rem;
+  padding: 0.55rem 0.85rem;
+  background-color: #faf7f4;
+  border: 1px solid #efe8e0;
+  border-radius: 6px;
+  animation: fadeInChips 0.2s ease;
+}
+
+@keyframes fadeInChips {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chips-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #8d7363;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.chips-list {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: #ffffff;
+  border: 1px solid #ded5cc;
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #2b2521;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.chip-remove {
+  background: none;
+  border: none;
+  color: #9a8c83;
+  font-size: 0.7rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.chip-remove:hover {
+  color: #e53935;
+}
+
+.clear-all-chips-btn {
+  background: none;
+  border: none;
+  color: #c47d2f;
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: 0.3rem;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.clear-all-chips-btn:hover {
+  color: #9b5815;
 }
 
 /* Product Cards Grid (4 columns → matches screenshot) */

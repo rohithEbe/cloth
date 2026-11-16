@@ -1,10 +1,11 @@
 /* ==========================================================================
-   Categories Component Styles (Matching OLIVIA Design)
+   Categories Component — Modern Upgraded Design
    ========================================================================== */
+
 .olivia-categories-section {
   width: 100%;
-  padding: 3rem 0;
-  background-color: #faf8f5;
+  padding: 4.5rem 0;
+  background: linear-gradient(180deg, #faf8f5 0%, #f3ede7 100%);
   border-top: 1px solid #f0ebe4;
 }
 
@@ -14,52 +15,87 @@
   padding: 0 1.5rem;
 }
 
+/* ── Header ── */
 .categories-header {
   text-align: center;
-  margin-bottom: 2.2rem;
+  margin-bottom: 2.8rem;
 }
 
 .categories-subtitle {
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.18em;
   color: #8d7363;
   display: block;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.5rem;
 }
 
 .categories-heading {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.85rem;
+  font-size: 2.2rem;
   font-weight: 700;
   color: #2b2521;
+  margin-bottom: 0.6rem;
+  line-height: 1.2;
 }
 
+.categories-desc {
+  font-size: 0.9rem;
+  color: #9a8c83;
+  margin: 0;
+}
+
+/* ── Grid: 3 columns ── */
 .categories-grid-layout {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
 }
 
+/* ── Tile ── */
 .category-tile {
-  background-color: #ffffff;
+  background: #ffffff;
   border: 1px solid #ebe5df;
-  border-radius: 4px;
+  border-radius: 12px;
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.32s cubic-bezier(0.25, 0.8, 0.25, 1),
+              box-shadow 0.32s cubic-bezier(0.25, 0.8, 0.25, 1),
+              border-color 0.2s ease;
 }
 
 .category-tile:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(141, 115, 99, 0.18);
   border-color: #8d7363;
 }
 
+.category-tile.active {
+  border-color: #8d7363;
+  box-shadow: 0 0 0 3px rgba(141, 115, 99, 0.2);
+}
+
+/* ── Tag Badge ── */
+.cat-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 10;
+  background: #2b2521;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* ── Image ── */
 .category-img-container {
-  height: 200px;
+  height: 220px;
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -69,70 +105,144 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.55s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .category-tile:hover .cat-img {
-  transform: scale(1.06);
+  transform: scale(1.09);
 }
 
 .cat-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(180deg, transparent 40%, rgba(43, 37, 33, 0.5) 100%);
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 30%,
+    rgba(43, 37, 33, 0.55) 100%
+  );
+  transition: opacity 0.3s ease;
 }
 
+.category-tile:hover .cat-overlay {
+  opacity: 0.85;
+}
+
+/* ── Details ── */
 .cat-details {
-  padding: 1.25rem 1rem;
+  padding: 1.3rem 1.1rem 1.4rem;
   text-align: center;
-  background-color: #ffffff;
+  background: #ffffff;
+  position: relative;
 }
 
 .cat-icon-badge {
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   display: inline-block;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.45rem;
+  transition: transform 0.3s ease;
+}
+
+.category-tile:hover .cat-icon-badge {
+  transform: scale(1.15) rotate(-5deg);
 }
 
 .cat-name {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #2b2521;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.3rem;
+  font-family: 'Playfair Display', Georgia, serif;
 }
 
 .cat-count {
   font-size: 0.78rem;
   color: #8c857f;
   display: block;
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.9rem;
+  font-weight: 500;
 }
 
-.cat-shop-link {
+/* ── Shop Now Button (slides up on hover) ── */
+.cat-shop-btn {
+  display: inline-block;
+  padding: 0.42rem 1.2rem;
   font-size: 0.78rem;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   color: #8d7363;
-  letter-spacing: 0.04em;
-  transition: color 0.2s;
+  background: transparent;
+  border: 1.5px solid #8d7363;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.22s ease, color 0.22s ease, transform 0.22s ease;
+  transform: translateY(4px);
+  opacity: 0.75;
 }
 
-.category-tile:hover .cat-shop-link {
+.category-tile:hover .cat-shop-btn {
+  background: #8d7363;
+  color: #ffffff;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ── Footer: View All ── */
+.categories-footer {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+.view-all-btn {
+  display: inline-block;
+  padding: 0.72rem 2.2rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   color: #2b2521;
-  text-decoration: underline;
+  background: transparent;
+  border: 2px solid #2b2521;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  text-transform: uppercase;
 }
 
-@media (max-width: 992px) {
+.view-all-btn:hover {
+  background: #2b2521;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
   .categories-grid-layout {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
   }
 }
 
-@media (max-width: 540px) {
+@media (max-width: 600px) {
+  .categories-heading {
+    font-size: 1.6rem;
+  }
+
+  .categories-grid-layout {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .category-img-container {
+    height: 160px;
+  }
+
+  .cat-shop-btn {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 400px) {
   .categories-grid-layout {
     grid-template-columns: 1fr;
   }
 }
-

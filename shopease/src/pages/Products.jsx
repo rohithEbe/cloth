@@ -13,6 +13,33 @@ const Products = ({ onAddToCart, onToggleWishlist, wishlistItems = [] }) => {
   const [activePage, setActivePage] = useState(2);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
 
+  // Modern Category filter improvements
+  const [categorySearch, setCategorySearch] = useState("");
+  const [isCategoriesOpen, setIsCategoriesOpen] = useState(true);
+  const [showAllCategories, setShowAllCategories] = useState(false);
+
+  const categoryList = [
+    { name: "Electronics", icon: "💻", count: 24 },
+    { name: "Fashion", icon: "👗", count: 32 },
+    { name: "Shoes", icon: "👟", count: 18 },
+    { name: "Watches", icon: "⌚", count: 12 },
+    { name: "Accessories", icon: "👜", count: 20 },
+    { name: "Home & Living", icon: "🏠", count: 14 },
+    { name: "Beauty & Cosmetics", icon: "💄", count: 28 },
+    { name: "Jewelry", icon: "✨", count: 16 },
+    { name: "Sports & Fitness", icon: "🏃", count: 19 },
+    { name: "Kids & Toys", icon: "🧸", count: 11 },
+  ];
+
+  const filteredCategoryOptions = categoryList.filter((cat) =>
+    cat.name.toLowerCase().includes(categorySearch.toLowerCase())
+  );
+
+  const visibleCategories =
+    categorySearch.trim().length > 0 || showAllCategories
+      ? filteredCategoryOptions
+      : filteredCategoryOptions.slice(0, 6);
+
   // Live countdown timer state (5d 12h 34m 27s)
   const [timeLeft, setTimeLeft] = useState({
     days: 5,
@@ -140,33 +167,77 @@ const Products = ({ onAddToCart, onToggleWishlist, wishlistItems = [] }) => {
             </div>
 
             {/* Categories Accordion */}
-            <div className="filter-group">
-              <div className="group-title">
+            <div className={`filter-group ${isCategoriesOpen ? "open" : "collapsed"}`}>
+              <div
+                className="group-title clickable-title"
+                onClick={() => setIsCategoriesOpen(!isCategoriesOpen)}
+                role="button"
+                tabIndex={0}
+              >
                 <span>Categories</span>
-                <span className="caret-icon">⌃</span>
+                <span className={`caret-icon ${isCategoriesOpen ? "rotate-up" : "rotate-down"}`}>
+                  ⌃
+                </span>
               </div>
-              <div className="filter-options-list">
-                {[
-                  { name: "Electronics", icon: "💻", count: 24 },
-                  { name: "Fashion", icon: "👗", count: 32 },
-                  { name: "Shoes", icon: "👟", count: 18 },
-                  { name: "Watches", icon: "⌚", count: 12 },
-                  { name: "Accessories", icon: "👜", count: 20 },
-                  { name: "Home & Living", icon: "🏠", count: 14 },
-                ].map((cat) => (
-                  <label key={cat.name} className="filter-checkbox-row">
+
+              {isCategoriesOpen && (
+                <div className="category-filter-body">
+                  {/* Category Search Input (Web standard for large category lists) */}
+                  <div className="category-search-wrapper">
+                    <span className="cat-search-icon">🔍</span>
                     <input
-                      type="checkbox"
-                      checked={selectedCategories.includes(cat.name)}
-                      onChange={() => handleCategoryToggle(cat.name)}
+                      type="text"
+                      className="category-search-input"
+                      placeholder="Search categories..."
+                      value={categorySearch}
+                      onChange={(e) => setCategorySearch(e.target.value)}
                     />
-                    <span className="checkmark-box"></span>
-                    <span className="cat-icon">{cat.icon}</span>
-                    <span className="filter-name">{cat.name}</span>
-                    <span className="filter-count">({cat.count})</span>
-                  </label>
-                ))}
-              </div>
+                    {categorySearch && (
+                      <button
+                        className="cat-search-clear"
+                        onClick={() => setCategorySearch("")}
+                        title="Clear search"
+                      >
+                        ✕
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Categories list */}
+                  <div className="filter-options-list">
+                    {visibleCategories.map((cat) => (
+                      <label key={cat.name} className="filter-checkbox-row">
+                        <input
+                          type="checkbox"
+                          checked={selectedCategories.includes(cat.name)}
+                          onChange={() => handleCategoryToggle(cat.name)}
+                        />
+                        <span className="checkmark-box"></span>
+                        <span className="cat-icon">{cat.icon}</span>
+                        <span className="filter-name">{cat.name}</span>
+                        <span className="filter-count">({cat.count})</span>
+                      </label>
+                    ))}
+
+                    {filteredCategoryOptions.length === 0 && (
+                      <p className="no-cat-found">No categories matching "{categorySearch}"</p>
+                    )}
+                  </div>
+
+                  {/* Show More / Show Less Toggle button */}
+                  {!categorySearch && filteredCategoryOptions.length > 6 && (
+                    <button
+                      type="button"
+                      className="toggle-more-cat-btn"
+                      onClick={() => setShowAllCategories(!showAllCategories)}
+                    >
+                      {showAllCategories
+                        ? "− Show Less"
+                        : `+ Show ${filteredCategoryOptions.length - 6} More`}
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Price Range */}
@@ -281,7 +352,7 @@ const Products = ({ onAddToCart, onToggleWishlist, wishlistItems = [] }) => {
           {/* Header Controls Bar */}
           <div className="catalog-top-bar">
             <div className="products-count-label">
-              Showing 1-12 of 86 products
+              Showing {displayProducts.length} of {shopProducts.length} products
             </div>
 
             <div className="catalog-controls-right">
@@ -331,6 +402,61 @@ const Products = ({ onAddToCart, onToggleWishlist, wishlistItems = [] }) => {
               </div>
             </div>
           </div>
+
+          {/* Active Filter Chips (Modern web filter UX) */}
+          {(selectedCategories.length > 0 || selectedBrands.length > 0 || selectedRating) && (
+            <div className="active-filter-chips-bar">
+              <span className="chips-label">Applied:</span>
+              <div className="chips-list">
+                {selectedCategories.map((cat) => (
+                  <span key={cat} className="filter-chip">
+                    {cat}
+                    <button
+                      type="button"
+                      onClick={() => handleCategoryToggle(cat)}
+                      className="chip-remove"
+                      title={`Remove ${cat}`}
+                    >
+                      ✕
+                    </button>
+                  </span>
+                ))}
+                {selectedBrands.map((b) => (
+                  <span key={b} className="filter-chip">
+                    {b}
+                    <button
+                      type="button"
+                      onClick={() => handleBrandToggle(b)}
+                      className="chip-remove"
+                      title={`Remove ${b}`}
+                    >
+                      ✕
+                    </button>
+                  </span>
+                ))}
+                {selectedRating && (
+                  <span className="filter-chip">
+                    ★ {selectedRating}+
+                    <button
+                      type="button"
+                      onClick={() => setSelectedRating(null)}
+                      className="chip-remove"
+                      title="Clear rating"
+                    >
+                      ✕
+                    </button>
+                  </span>
+                )}
+                <button
+                  type="button"
+                  className="clear-all-chips-btn"
+                  onClick={handleClearFilters}
+                >
+                  Clear all
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* Product Cards Grid (4 Columns as in Screenshot) */}
           <div className={`shop-products-grid ${viewMode === "list" ? "list-mode" : ""}`}>
